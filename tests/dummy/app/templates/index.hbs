@@ -4,264 +4,137 @@
 
 <h3>Basic usage</h3>
 
-{{#swiper-container}}
-  {{#swiper-slide}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
-
-<pre>
-  \{{#swiper-container}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
+<SwiperContainer
+  @currentSlide={{this.currentSlide}}
+  @onChange={{fn (mut this.currentSlide)}}
+>
+  <SwiperSlide>Slide 1</SwiperSlide>
+  <SwiperSlide>Slide 2</SwiperSlide>
+  <SwiperSlide>Slide 3</SwiperSlide>
+  <SwiperSlide>Slide 4</SwiperSlide>
+  <SwiperSlide>Slide 5</SwiperSlide>
+</SwiperContainer>
 
 <h3>Speedy Gonswiper</h3>
 
-{{#swiper-container speed=100}}
-  {{#swiper-slide}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
+<SwiperContainer @options={{hash speed=100}}>
+  <SwiperSlide>Slide 1</SwiperSlide>
+  <SwiperSlide>Slide 2</SwiperSlide>
+  <SwiperSlide>Slide 3</SwiperSlide>
+  <SwiperSlide>Slide 4</SwiperSlide>
+  <SwiperSlide>Slide 5</SwiperSlide>
+</SwiperContainer>
 
-<pre>
-  \{{#swiper-container speed=100}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
+{{this.currentSlide}}
 
 <h3>Swiper Events</h3>
 
-{{#swiper-container events=(hash reachEnd=(action "onSwiperEnd"))}}
-  {{#swiper-slide}}Start{{/swiper-slide}}
-  {{#swiper-slide}}End{{/swiper-slide}}
-{{/swiper-container}}
-
-<pre>
-  \{{#swiper-container events=(hash reachEnd=(action "onSwiperEnd"))}}
-    \{{#swiper-slide}}Start\{{/swiper-slide}}
-    \{{#swiper-slide}}End\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
+<SwiperContainer @events={{hash reachEnd=this.onSwiperEnd}}>
+  <SwiperSlide>Start</SwiperSlide>
+  <SwiperSlide>End</SwiperSlide>
+</SwiperContainer>
 
 <h3>Default Navigation</h3>
-{{#swiper-container navigation=true}}
-  {{#swiper-slide}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide}}Slide 3{{/swiper-slide}}
-{{/swiper-container}}
-
-<pre>
-  \{{#swiper-container navigation=true}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
+<SwiperContainer @options={{hash navigation=true}}>
+  <SwiperSlide>Slide 1</SwiperSlide>
+  <SwiperSlide>Slide 2</SwiperSlide>
+  <SwiperSlide>Slide 3</SwiperSlide>
+</SwiperContainer>
 
 <h3>Infinite + Pagination</h3>
 
-{{#swiper-container pagination=true loop=true}}
-  {{#swiper-slide class='myslide myslide-1'}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide class='myslide myslide-2'}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide class='myslide myslide-3'}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide class='myslide myslide-4'}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide class='myslide myslide-5'}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
-
-<pre>
-  \{{#swiper-container pagination=true loop=true}}
-    \{{#swiper-slide class='myslide myslide-1'}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide class='myslide myslide-2'}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide class='myslide myslide-3'}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide class='myslide myslide-4'}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide class='myslide myslide-5'}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
+<SwiperContainer @options={{hash pagination=true loop=true}}>
+  <SwiperSlide class='myslide myslide-1'>Slide 1</SwiperSlide>
+  <SwiperSlide class='myslide myslide-2'>Slide 2</SwiperSlide>
+  <SwiperSlide class='myslide myslide-3'>Slide 3</SwiperSlide>
+  <SwiperSlide class='myslide myslide-4'>Slide 4</SwiperSlide>
+  <SwiperSlide class='myslide myslide-5'>Slide 5</SwiperSlide>
+</SwiperContainer>
 
 <h3>Vertical + Pagination</h3>
 
-{{#swiper-container pagination=true vertical=true}}
-  {{#swiper-slide}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
-
-<pre>
-  \{{#swiper-container pagination=true vertical=true}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
+<SwiperContainer @options={{hash pagination=true direction="vertical"}}>
+  <SwiperSlide>Slide 1</SwiperSlide>
+  <SwiperSlide>Slide 2</SwiperSlide>
+  <SwiperSlide>Slide 3</SwiperSlide>
+  <SwiperSlide>Slide 4</SwiperSlide>
+  <SwiperSlide>Slide 5</SwiperSlide>
+</SwiperContainer>
 
 <h3>Vertical + Free &amp; Sticky</h3>
 
-{{#swiper-container freeMode=true freeModeSticky=true vertical=true}}
-  {{#swiper-slide}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
-
-<pre>
-  \{{#swiper-container freeMode=true freeModeSticky=true vertical=true}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
+<SwiperContainer @options={{hash freeMode=true freeModeSticky=true vertical=true}}>
+  <SwiperSlide>Slide 1</SwiperSlide>
+  <SwiperSlide>Slide 2</SwiperSlide>
+  <SwiperSlide>Slide 3</SwiperSlide>
+  <SwiperSlide>Slide 4</SwiperSlide>
+  <SwiperSlide>Slide 5</SwiperSlide>
+</SwiperContainer>
 
 <h3>Centered Slides + Pagination + Cursor</h3>
 
-{{#swiper-container grabCursor=true pagination=true centered=true slidesPerView=4 spaceBetween=5}}
-  {{#swiper-slide}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
-
-<pre>
-  \{{#swiper-container grabCursor=true pagination=true centered=true slidesPerView=4 spaceBetween=5}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
+<SwiperContainer @options={{hash grabCursor=true pagination=true centered=true slidesPerView=4 spaceBetween=5}}>
+  <SwiperSlide>Slide 1</SwiperSlide>
+  <SwiperSlide>Slide 2</SwiperSlide>
+  <SwiperSlide>Slide 3</SwiperSlide>
+  <SwiperSlide>Slide 4</SwiperSlide>
+  <SwiperSlide>Slide 5</SwiperSlide>
+</SwiperContainer>
 
 <h3>Keyboard + Mousewheel Control</h3>
 
-{{#swiper-container keyboard=true mousewheel=true slidesPerView=2}}
-  {{#swiper-slide}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
-
-<pre>
-  \{{#swiper-container keyboard=true mousewheel=true slidesPerView=2}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
+<SwiperContainer @options={{hash keyboard=true mousewheel=true slidesPerView=2}}>
+  <SwiperSlide>Slide 1</SwiperSlide>
+  <SwiperSlide>Slide 2</SwiperSlide>
+  <SwiperSlide>Slide 3</SwiperSlide>
+  <SwiperSlide>Slide 4</SwiperSlide>
+  <SwiperSlide>Slide 5</SwiperSlide>
+</SwiperContainer>
 
 <h3>Change Listener</h3>
 
 <p>The configured action receives the HTML-Element of the selected slide.</p>
 
-{{#swiper-container onChange=(action 'addToHistory')}}
-  {{#swiper-slide}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
+<SwiperContainer @onChange={{this.addToHistory}}>
+  <SwiperSlide>Slide 1</SwiperSlide>
+  <SwiperSlide>Slide 2</SwiperSlide>
+  <SwiperSlide>Slide 3</SwiperSlide>
+  <SwiperSlide>Slide 4</SwiperSlide>
+  <SwiperSlide>Slide 5</SwiperSlide>
+</SwiperContainer>
 
 <br>
-<textarea>{{selectionHistory}}</textarea>
-
-<pre>
-  \{{#swiper-container onChange=(action 'addToHistory')}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-
-  &lt;br&gt;
-  &lt;textarea&gt;\{{selectionHistory}}&lt;/textarea&gt;
-</pre>
 
 <h3>2 way binded index</h3>
 
-{{#swiper-container currentSlide=currentSlide}}
-  {{#swiper-slide}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
+<SwiperContainer @currentSlide={{this.currentSlide}}>
+  <SwiperSlide>Slide 1</SwiperSlide>
+  <SwiperSlide>Slide 2</SwiperSlide>
+  <SwiperSlide>Slide 3</SwiperSlide>
+  <SwiperSlide>Slide 4</SwiperSlide>
+  <SwiperSlide>Slide 5</SwiperSlide>
+</SwiperContainer>
 
 <br>
-<a {{action 'goToTwo'}} class="btn btn--s btn--gray" style="float: right; cursor: pointer;">Go to 2</a>
-Current Slideindex: {{currentSlide}}
-
-<pre>
-  \{{#swiper-container currentSlide=currentSlide}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-
-  &lt;br&gt;
-  &lt;a \{{action 'goToTwo'}} &gt;Go to 2&lt;/a&gt;
-  Current Slideindex: \{{currentSlide}}
-</pre>
+<a {{on "click" this.goToTwo}} class="btn btn--s btn--gray" style="float: right; cursor: pointer;">Go to 2</a>
+Current Slideindex: {{this.currentSlide}}
 
 <h4>¡ Atención, Atención !</h4>
 
 <p>Please note that, in difference to a bare Swiper, this will always return <em>the correct</em>
   Index of the current slide. Even in loops.</p>
 
-{{#swiper-container currentSlide=currentSlide2 loop=true centered=true slidesPerView=4}}
-  {{#swiper-slide class='myslide myslide-1'}}Slide 1{{/swiper-slide}}
-  {{#swiper-slide class='myslide myslide-2'}}Slide 2{{/swiper-slide}}
-  {{#swiper-slide class='myslide myslide-3'}}Slide 3{{/swiper-slide}}
-  {{#swiper-slide class='myslide myslide-4'}}Slide 4{{/swiper-slide}}
-  {{#swiper-slide class='myslide myslide-5'}}Slide 5{{/swiper-slide}}
-{{/swiper-container}}
-Current Slideindex: {{currentSlide2}}
-
-<pre>
-  \{{#swiper-container currentSlide=currentSlide2 loop=true centered=true slidesPerView=4}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 3\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 4\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 5\{{/swiper-slide}}
-  \{{/swiper-container}}
-  Current Slideindex: \{{currentSlide2}}
-</pre>
+<SwiperContainer @currentSlide={{this.currentPicture}} @options={{hash loop=true centered=true slidesPerView=4}}>
+  <SwiperSlide class='myslide myslide-1'>Slide 1</SwiperSlide>
+  <SwiperSlide class='myslide myslide-2'>Slide 2</SwiperSlide>
+  <SwiperSlide class='myslide myslide-3'>Slide 3</SwiperSlide>
+  <SwiperSlide class='myslide myslide-4'>Slide 4</SwiperSlide>
+  <SwiperSlide class='myslide myslide-5'>Slide 5</SwiperSlide>
+</SwiperContainer>
 
 <h3>Triggering an update</h3>
 <p>If you find yourself adding/removing slides, you need to 'update' the swipe-container.</p>
 <p>You can do so by referencing a variable to observe for changes. This is usually your list of slides</p>
-
-<pre>
-  \{{#swiper-container updateFor=propertyToWatch}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
 
 <h3>Forcing an update/repaint directly</h3>
 <p>Swiper as shown to be a little bit touchy when it comes to situations where you show it via css / manipulate
@@ -272,28 +145,13 @@ Current Slideindex: {{currentSlide2}}
   defaults to false. See <a href="http://idangero.us/swiper/api/#methods">the Swiper docs</a> for more details.</p>
 
 <strong>Template</strong>
-<pre>  \{{#swiper-container registerAs=superDuperSwiper}}
-    \{{#swiper-slide}}Slide 1\{{/swiper-slide}}
-    \{{#swiper-slide}}Slide 2\{{/swiper-slide}}
-  \{{/swiper-container}}
-</pre>
 
 <strong>Controller</strong>
-<pre>  modalHiddenOrSmthLikeThat() {
-    this.get('superDuperSwiper').forceUpdate();
-  }
-</pre>
 
 <h3>Contextual Slides</h3>
 
-{{#swiper-container as |container|}}
-  {{#container.slide}}Slide 1{{/container.slide}}
-  {{#container.slide}}Slide 2{{/container.slide}}
-{{/swiper-container}}
+<SwiperContainer as |container|>
+  <container.slide>Slide 1</container.slide>
+  <container.slide>Slide 2</container.slide>
+</SwiperContainer>
 
-<pre>
-  \{{#swiper-container as |container|}}
-    \{{#container.slide}}Slide 1\{{/container.slide}}
-    \{{#container.slide}}Slide 2\{{/container.slide}}
-  \{{/swiper-container}}
-</pre>

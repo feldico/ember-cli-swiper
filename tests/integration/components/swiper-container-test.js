@@ -5,16 +5,16 @@ import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
 import { run } from '@ember/runloop';
 
-module('Integration | Component | swiper container', function(hooks) {
+module('Integration | Component | swiper container', function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.actions = {};
     this.send = (actionName, ...args) =>
       this.actions[actionName].apply(this, args);
   });
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     await render(hbs`{{swiper-container}}`);
     assert.equal(find('*').textContent.trim(), '');
 
@@ -26,7 +26,7 @@ module('Integration | Component | swiper container', function(hooks) {
     assert.equal(find('*').textContent.trim(), 'template block text');
   });
 
-  test('it set `noSwiping` via attribute and `options`', async function(assert) {
+  test('it set `noSwiping` via attribute and `options`', async function (assert) {
     let expected = false;
 
     this.set('noSwiping', expected);
@@ -52,7 +52,7 @@ module('Integration | Component | swiper container', function(hooks) {
     );
   });
 
-  test('it should allow attributes to overwrite `options`', async function(assert) {
+  test('it should allow attributes to overwrite `options`', async function (assert) {
     let expected = 'fade';
 
     this.set('effect', expected);
@@ -68,17 +68,17 @@ module('Integration | Component | swiper container', function(hooks) {
     );
   });
 
-  test('predefined classes are added', async function(assert) {
+  test('predefined classes are added', async function (assert) {
     await render(hbs`{{swiper-container}}`);
     assert.ok(find('.swiper-container'));
   });
 
-  test('contains the wrapper', async function(assert) {
+  test('contains the wrapper', async function (assert) {
     await render(hbs`{{swiper-container id="swp-container"}}`);
     assert.ok(find('#swp-container').querySelector('.swiper-wrapper'));
   });
 
-  test('pagination node is present if requested', async function(assert) {
+  test('pagination node is present if requested', async function (assert) {
     await render(hbs`{{swiper-container id="swp-container" pagination=false}}`);
     assert.notOk(
       find('#swp-container').querySelector('.swiper-pagination'),
@@ -119,7 +119,7 @@ module('Integration | Component | swiper container', function(hooks) {
     );
   });
 
-  test('navigation buttons are present if requested', async function(assert) {
+  test('navigation buttons are present if requested', async function (assert) {
     await render(hbs`{{swiper-container id="swp-container" navigation=false}}`);
     assert.notOk(find('#swp-container').querySelector('.swiper-button-next'));
     assert.notOk(find('#swp-container').querySelector('.swiper-button-prev'));
@@ -134,7 +134,7 @@ module('Integration | Component | swiper container', function(hooks) {
     assert.ok(find('#swp-container').querySelector('.swiper-button-prev'));
   });
 
-  test('it supports `effect` attribute', async function(assert) {
+  test('it supports `effect` attribute', async function (assert) {
     await render(hbs`{{swiper-container id="swp-container" effect="fade"}}`);
     assert.ok(
       find('#swp-container.swiper-container-fade'),
@@ -142,7 +142,7 @@ module('Integration | Component | swiper container', function(hooks) {
     );
   });
 
-  test('it destroys the Swiper instance when component element destroyed', async function(assert) {
+  test('it destroys the Swiper instance when component element destroyed', async function (assert) {
     assert.expect(2);
     this.set('componentInstance', null);
     this.set('active', true);
@@ -152,7 +152,7 @@ module('Integration | Component | swiper container', function(hooks) {
     );
 
     run(() => {
-      let componentInstance = this.get('componentInstance');
+      let componentInstance = this.componentInstance;
       assert.ok(componentInstance._swiper, 'Swiper intantiated');
 
       sinon
@@ -164,7 +164,7 @@ module('Integration | Component | swiper container', function(hooks) {
     });
   });
 
-  test('it removes all `slideChangeTransitionEnd` handlers when component element destroyed', async function(assert) {
+  test('it removes all `slideChangeTransitionEnd` handlers when component element destroyed', async function (assert) {
     this.set('componentInstance', null);
     this.set('rendered', true);
 
@@ -172,7 +172,7 @@ module('Integration | Component | swiper container', function(hooks) {
       hbs`{{#if rendered}}{{swiper-container registerAs=componentInstance}}{{/if}}`
     );
 
-    let componentInstance = this.get('componentInstance');
+    let componentInstance = this.componentInstance;
     let swiperInstance = componentInstance._swiper;
     let originalDestroy = swiperInstance.destroy;
     let originalSwiperOff = swiperInstance.off;
@@ -193,14 +193,14 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('rendered', false); // trigger swipper destroy
   });
 
-  test('it yields a slide component', async function(assert) {
+  test('it yields a slide component', async function (assert) {
     await render(
       hbs`{{#swiper-container as |container|}}{{container.slide}}{{/swiper-container}}`
     );
     assert.equal(findAll('.swiper-slide').length, 1, 'renders a single slide');
   });
 
-  test('it activates the slide at index `currentSlide` on render', async function(assert) {
+  test('it activates the slide at index `currentSlide` on render', async function (assert) {
     await render(hbs`
       {{#swiper-container currentSlide=1}}
         {{swiper-slide}}
@@ -215,7 +215,7 @@ module('Integration | Component | swiper container', function(hooks) {
     );
   });
 
-  test('it updates the active slide when `currentSlide` is updated', async function(assert) {
+  test('it updates the active slide when `currentSlide` is updated', async function (assert) {
     this.set('currentSlide', 0);
 
     await render(hbs`
@@ -234,12 +234,12 @@ module('Integration | Component | swiper container', function(hooks) {
     );
   });
 
-  test('it triggers `swiper.update()` when `updateFor` is updated', async function(assert) {
+  test('it triggers `swiper.update()` when `updateFor` is updated', async function (assert) {
     this.set('updateFor', '');
     await render(hbs`
       {{swiper-container updateFor=updateFor registerAs=componentInstance}}`);
 
-    let componentInstance = this.get('componentInstance');
+    let componentInstance = this.componentInstance;
 
     sinon
       .stub(componentInstance._swiper, 'update')
@@ -249,7 +249,7 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('updateFor', 'updateTranslate');
   });
 
-  test('it updates the `currentSlide` when viewing and removing the last item', async function(assert) {
+  test('it updates the `currentSlide` when viewing and removing the last item', async function (assert) {
     this.set('itemList', ['item-1', 'item-2']);
 
     await render(hbs`
@@ -272,17 +272,17 @@ module('Integration | Component | swiper container', function(hooks) {
     this.set('itemList', ['item-1']);
     await waitFor('.swiper-slide-active .item-1');
 
-    assert.equal(this.get('currentSlide'), 0);
+    assert.equal(this.currentSlide, 0);
   });
 
-  test('it subscribes `events` actions map as Swiper events', async function(assert) {
+  test('it subscribes `events` actions map as Swiper events', async function (assert) {
     this.actions.onBeforeDestroy = () => assert.ok(true);
 
     await render(hbs`
       {{swiper-container events=(hash beforeDestroy=(action "onBeforeDestroy"))}}`);
   });
 
-  test('it supports manual swiper initialization when `init` event configured', async function(assert) {
+  test('it supports manual swiper initialization when `init` event configured', async function (assert) {
     this.set('componentInstance', null);
     this.actions.onInit = () => assert.ok(true, 'invoked init handler');
 
@@ -290,7 +290,7 @@ module('Integration | Component | swiper container', function(hooks) {
       {{swiper-container registerAs=componentInstance events=(hash init=(action "onInit"))}}`);
   });
 
-  test('it triggers `autoplay` with custom `currentSlide`', async function(assert) {
+  test('it triggers `autoplay` with custom `currentSlide`', async function (assert) {
     let run = false;
 
     this.actions.onAutoplay = () => {
@@ -318,7 +318,7 @@ module('Integration | Component | swiper container', function(hooks) {
     `);
   });
 
-  test('it exposes default swiper navigation controls to `navigation=true`', async function(assert) {
+  test('it exposes default swiper navigation controls to `navigation=true`', async function (assert) {
     await render(hbs`
       {{#swiper-container navigation=true}}
         {{swiper-slide}}
@@ -347,7 +347,7 @@ module('Integration | Component | swiper container', function(hooks) {
     );
   });
 
-  test('it applies custom navigation hash of control selectors', async function(assert) {
+  test('it applies custom navigation hash of control selectors', async function (assert) {
     await render(hbs`
       {{#swiper-container navigation=(hash nextEl=".is-next" prevEl=".is-last")}}
         {{swiper-slide}}
@@ -360,7 +360,7 @@ module('Integration | Component | swiper container', function(hooks) {
     assert.ok(find('.is-last'), 'rendered custom nav prev button');
   });
 
-  test('it applies custom `navigation.disabledClass`', async function(assert) {
+  test('it applies custom `navigation.disabledClass`', async function (assert) {
     await render(hbs`
       {{#swiper-container navigation=(hash disabledClass="is-disabled")}}
         {{swiper-slide}}
@@ -372,7 +372,7 @@ module('Integration | Component | swiper container', function(hooks) {
     assert.ok(find('.is-disabled'), 'rendered custom disabled class');
   });
 
-  test('it provides swiper instance as context of `update`', async function(assert) {
+  test('it provides swiper instance as context of `update`', async function (assert) {
     this.set('updateForValue', '');
     this.set('componentInstance', null);
 
@@ -382,7 +382,7 @@ module('Integration | Component | swiper container', function(hooks) {
 
     let swiperInstance = this.get('componentInstance._swiper');
     let originalUpdate = swiperInstance.update;
-    swiperInstance.update = function() {
+    swiperInstance.update = function () {
       assert.strictEqual(
         this,
         swiperInstance,
