@@ -1,0 +1,27 @@
+<div
+  class="swiper"
+  {{did-insert this.initSwiper}}
+  {{did-update this.onUpdate @currentSlide @options @events}}
+>
+  <div class="swiper-wrapper">
+    {{yield (hash
+        slide=(component 'swiper-slide')
+        forceUpdate=this.forceUpdate
+        registerAs=this.registerAs
+      )
+    }}
+  </div>
+
+  {{#if this.hasPagination}}
+    <div class="swiper-pagination"></div>
+  {{/if}}
+
+  {{#if this.hasNavigation}}
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  {{/if}}
+
+  {{#if this.hasScrollbar}}
+    <div class="swiper-scrollbar"></div>
+  {{/if}}
+</div>
